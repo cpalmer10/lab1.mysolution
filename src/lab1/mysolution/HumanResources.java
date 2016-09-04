@@ -23,9 +23,6 @@ public class HumanResources {
    public String getCubeId(){
        return cubeId;
    }
-   public String getEmployeeStatus()  {
-            return employee.getStatus();   
-   }
 }
 
     

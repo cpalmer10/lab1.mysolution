@@ -29,14 +29,8 @@ public class Startup {
         employee.setSsn("620-76-8353");
         employee.setBirthDate(new Date("04/11/1991"));
         employee.setCubeId(hr.getCubeId());
-        //employee.setCubeId("C3PO");
-               
-        System.out.println(employee.getCubeId());
-        System.out.println(employee.getBirthdate());
-        System.out.println(employee.getStatus());
-        //System.out.println("The employee's status is: " + employee.getFirstName());
+       
+        employee.checkOrientationStatus(employee.hasMetWithHr(), employee.hasMetDeptStaff(), employee.hasReviewedDeptPolicies(), employee.hasMovedIn());
     }
 
-  
-    
 }

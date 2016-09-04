@@ -37,13 +37,7 @@ public class Employee {
         SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
         return sdf.format(birthDate);
     }
-    
-    public void orientationProgress(){        
-        metWithHr();
-        metDeptStaff();
-        reviewedDeptPolicies();
-        movedIn();
-    }
+        
             
     public String getFirstName() {
         return firstName;
@@ -85,15 +79,54 @@ public class Employee {
 
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
+    }        
+
+    public boolean hasMetWithHr() {
+        return metWithHr;
+    }
+
+    public void setMetWithHr(boolean metWithHr) {
+        this.metWithHr = metWithHr;
+    }
+
+    public boolean hasMetDeptStaff() {
+        return metDeptStaff;
+    }
+
+    public void setMetDeptStaff(boolean metDeptStaff) {
+        this.metDeptStaff = metDeptStaff;
+    }
+
+    public boolean hasReviewedDeptPolicies() {
+        return reviewedDeptPolicies;
+    }
+
+    public void setReviewedDeptPolicies(boolean reviewedDeptPolicies) {
+        this.reviewedDeptPolicies = reviewedDeptPolicies;
+    }
+
+    public boolean hasMovedIn() {
+        return movedIn;
+    }
+
+    public void setMovedIn(boolean movedIn) {
+        this.movedIn = movedIn;
     }
     
-    public String getStatus(){
-        return "ha";
+    
+    
+    
+    /*public void beginOrientation() {
+        metWithHr();
+        metDeptStaff();
+        reviewedDeptPolicies();
+        movedIn();        
     }
+*/
     
     private void metWithHr(){                      
         metWithHr = true;
-        System.out.println("Met with HR " + getFormattedDate());        
+       // System.out.println("Met with HR " + getFormattedDate());        
     }
     
     private void metDeptStaff(){
@@ -101,8 +134,7 @@ public class Employee {
             System.out.println("Met with Department Staff " + getFormattedDate());
             metDeptStaff = true;
         }
-        else
-        {
+        else {
             System.out.println("Sorry, you cannot meet with "
             + "department staff until you have met with HR.");
         }
@@ -110,34 +142,21 @@ public class Employee {
     }
     
     private void reviewedDeptPolicies(){
-        
-    }
-    
-    private void movedIn(){
-        
-    }
-    
-   
-      
-
-    // Assume this must be performed third
-    private void reviewDeptPolicies() {
-        if(metWithHr && metDeptStaff) {           
+        if (metWithHr && metDeptStaff){
             System.out.println("Reviewed Dept. Policies on " + getFormattedDate());
             reviewedDeptPolicies = true;
-        } else {
-            System.out.println("Sorry, you cannot review "
-                    + " department policies until you have first met with HR "
-                    + "and then with department staff.");
         }
-    }
-
-    // Assume this must be performed 4th
-    private void moveIntoCubicle(String cubeId) {
+        else {
+            System.out.println("Sorry, you cannot review department "
+                + "policies until you first meet with HR and then "
+                + "meet with Department staff.");
+        }
+    }   
+   
+    private void movedIn() {
         if(metWithHr && metDeptStaff && reviewedDeptPolicies) {           
-            System.out.println("Moved into cube on " + getFormattedDate());
-            
-            this.movedIn = true;
+            System.out.println("Moved into cube on " + getFormattedDate());            
+            movedIn = true;
         } else {
             System.out.println("Sorry, you cannot move in to a "
                     + "cubicle until you have first met with HR "
@@ -145,8 +164,49 @@ public class Employee {
                     + "department policies.");
         }
 
+    }    
+    
+    public String getStatus(){
+        return "ha";
     }
-
     
+    public void checkOrientationStatus(boolean metWithHr, boolean metDeptStaff, boolean reviewedDeptPolicies, boolean movedIn){
+        metWithHr();
+        if (this.metWithHr){
+            
+            System.out.println("\nHR Status:" + "\t\t" + "Completed " + getFormattedDate()); 
+        }
+        else {
+             System.out.println("HR Status:" + "\t\t" + "Incomplete"); 
+        }
+        
+        metDeptStaff();
+        if (this.metDeptStaff){
+            System.out.println("Dept Staff Status:" + "\t" + "Completed " + getFormattedDate()); 
+        }
+        else {
+             System.out.println("Dept Staff Status:" + "\t" + "Incomplete"); 
+        }
+        
+        
+        if (this.reviewedDeptPolicies){
+            System.out.println("Dept Policies Status:" + "\t" + "Completed " + getFormattedDate()); 
+        }
+        else {
+             System.out.println("Dept Policies Status:" + "\t" + "Incomplete"); 
+        }
+        
+        
+        if (this.movedIn){
+            System.out.println("Cubicle Status:" + "\t\t" + "Completed " + getFormattedDate());
+            System.out.println("Cubicle number: " + "\t" + getCubeId());
+        }
+        else {
+             System.out.println("Cubicle Status:" + "\t\t" + "Incomplete"); 
+        }
+        
+                    
+    }
 }
-    
+
+
