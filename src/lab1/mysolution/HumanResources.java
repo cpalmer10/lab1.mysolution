@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author Chris
  */
-public class HRManager {    
+public class HumanResources {    
     private Employee employee;                    
    
    
@@ -23,7 +23,7 @@ public class HRManager {
        employee = e;
    }
    public String getEmployeeStatus()  {
-        return employee.getStatus();   
+            return employee.getStatus();   
    }
 }
 

@@ -27,7 +27,13 @@ public class Employee {
         currentDate = new Date();
     }
     
+    private String getFormattedDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        return sdf.format(currentDate);
+    }
+    
     public void orientationProgress(String cubeId){
+        
         metWithHr();
         metDeptStaff();
         reviewedDeptPolicies();
@@ -74,22 +80,32 @@ public class Employee {
         this.cubeId = cubeId;
     }
 
-    public Date getCurrentDate() {
-        return currentDate;
+    public String getCurrentDate() {
+        return getFormattedDate();
     }
 
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
     }
+    
     public String getStatus(){
         return cubeId;
     }
-    private void metWithHr(){
-        
+    
+    private void metWithHr(){                      
+        metWithHr = true;
+        System.out.println("Met with HR " + getCurrentDate());        
     }
     
     private void metDeptStaff(){
-        
+        if (metWithHr){
+            System.out.println("Met with Department Staff " + getCurrentDate());
+            metDeptStaff = true;
+        }
+        else
+        {
+            
+        }
     }
     
     private void reviewedDeptPolicies(){
@@ -100,56 +116,13 @@ public class Employee {
         
     }
     
+   
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    private String formattedDate(Date currentDate){
-        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
-        return sdf.format(currentDate);
-    }
-
-    // Assume this must be performed first
-    private void meetWithHrForBenefitAndSalryInfo() {        
-        System.out.println("Met with Hr on " + formattedDate(currentDate));
-        metWithHr = true;
-    }
 
     // Assume this must be performed second
     private void meetDepartmentStaff() {
         if(metWithHr) {         
-            System.out.println("Met with Dept. Staff on " + formattedDate(currentDate));
+            System.out.println("Met with Dept. Staff on " + getFormattedDate());
             metDeptStaff = true;
         } else {
             System.out.println("Sorry, you cannot meet with "
@@ -160,7 +133,7 @@ public class Employee {
     // Assume this must be performed third
     private void reviewDeptPolicies() {
         if(metWithHr && metDeptStaff) {           
-            System.out.println("Reviewed Dept. Policies on " + formattedDate(currentDate));
+            System.out.println("Reviewed Dept. Policies on " + getFormattedDate());
             reviewedDeptPolicies = true;
         } else {
             System.out.println("Sorry, you cannot review "
@@ -172,7 +145,7 @@ public class Employee {
     // Assume this must be performed 4th
     private void moveIntoCubicle(String cubeId) {
         if(metWithHr && metDeptStaff && reviewedDeptPolicies) {           
-            System.out.println("Moved into cube on " + formattedDate(currentDate));
+            System.out.println("Moved into cube on " + getFormattedDate());
             
             this.movedIn = true;
         } else {
@@ -184,13 +157,6 @@ public class Employee {
 
     }
 
-    private String getStatus() {        
-        if(metWithHr && metDeptStaff
-           && reviewedDeptPolicies && movedIn) {
-            return "Orientation is completed on: " + formattedDate(currentDate);
-        } else {
-            return formattedDate(currentDate) + ": Orientation in progress...";
-        }
-    }
+    
 }
     

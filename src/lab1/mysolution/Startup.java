@@ -1,5 +1,7 @@
 package lab1.mysolution;
 
+import java.util.Date;
+
 /**
  * In this lab your challenge is to fix the code in both classes to use
  * proper encapsulation and the other best practices as explained by 
@@ -20,8 +22,13 @@ public class Startup {
             not have to be a GUI class.
         */
         Employee employee = new Employee();
-        employee.setFirstName("Pete");
-        System.out.println("The employee's status is: " + employee.getFirstName());
+        employee.setFirstName("Chris");
+        employee.setLastName("Palmer");
+        employee.setSsn("620-76-8353");
+        employee.setBirthDate(new Date(04/11/1991));
+        
+        System.out.println(employee.getFirstName());
+        //System.out.println("The employee's status is: " + employee.getFirstName());
     }
 
   
