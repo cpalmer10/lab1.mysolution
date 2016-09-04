@@ -10,17 +10,18 @@ import java.util.Date;
  * @author Chris
  */
 public class HumanResources {    
-    private Employee employee;                    
+    private Employee employee;
+    private String cubeId = "C3P0";
    
    
-   public void HRManager(String firstName, String lastName, String ssn, Date birthDate, String cubeId){
-       Employee e = new Employee();
-       e.setFirstName(firstName);
-       e.setLastName(lastName);
-       e.setSsn(ssn);
-       e.setBirthDate(birthDate);
-       e.setCubeId("C4786");
+   public void HumanResources(String cubeId){
+       Employee e = new Employee();       
+       e.setCubeId(getCubeId());
        employee = e;
+   }   
+   
+   public String getCubeId(){
+       return cubeId;
    }
    public String getEmployeeStatus()  {
             return employee.getStatus();   

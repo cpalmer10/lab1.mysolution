@@ -3,6 +3,7 @@ package lab1.mysolution;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /**
  * In this lab your challenge is to fix the code in both classes to use
  * proper encapsulation and the other best practices as explained by 
@@ -19,25 +20,29 @@ public class Employee {
     private boolean metWithHr;
     private boolean metDeptStaff;
     private boolean reviewedDeptPolicies;
-    private boolean movedIn;
-    private String cubeId;
+    private boolean movedIn;    
     private Date currentDate;
+    private String cubeId;
+    private HumanResources hr = new HumanResources();
 
     public Employee() {
-        currentDate = new Date();
+        currentDate = new Date();        
     }
     
     private String getFormattedDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
         return sdf.format(currentDate);
     }
+    public String getBirthdate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        return sdf.format(birthDate);
+    }
     
-    public void orientationProgress(String cubeId){
-        
+    public void orientationProgress(){        
         metWithHr();
         metDeptStaff();
         reviewedDeptPolicies();
-        movedIn(cubeId);
+        movedIn();
     }
             
     public String getFirstName() {
@@ -63,72 +68,57 @@ public class Employee {
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
+    
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
     public String getCubeId() {
-        return cubeId;
+        return hr.getCubeId();
     }
 
     public void setCubeId(String cubeId) {
-        this.cubeId = cubeId;
+        this.cubeId = hr.getCubeId();
     }
-
-    public String getCurrentDate() {
-        return getFormattedDate();
-    }
+    
 
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
     }
     
     public String getStatus(){
-        return cubeId;
+        return "ha";
     }
     
     private void metWithHr(){                      
         metWithHr = true;
-        System.out.println("Met with HR " + getCurrentDate());        
+        System.out.println("Met with HR " + getFormattedDate());        
     }
     
     private void metDeptStaff(){
         if (metWithHr){
-            System.out.println("Met with Department Staff " + getCurrentDate());
+            System.out.println("Met with Department Staff " + getFormattedDate());
             metDeptStaff = true;
         }
         else
         {
-            
+            System.out.println("Sorry, you cannot meet with "
+            + "department staff until you have met with HR.");
         }
+        
     }
     
     private void reviewedDeptPolicies(){
         
     }
     
-    private void movedIn(String cubeId){
+    private void movedIn(){
         
     }
     
    
-    
-
-    // Assume this must be performed second
-    private void meetDepartmentStaff() {
-        if(metWithHr) {         
-            System.out.println("Met with Dept. Staff on " + getFormattedDate());
-            metDeptStaff = true;
-        } else {
-            System.out.println("Sorry, you cannot meet with "
-                    + "department staff until you have met with HR.");
-        }
-    }
+      
 
     // Assume this must be performed third
     private void reviewDeptPolicies() {
