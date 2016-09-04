@@ -20,7 +20,7 @@ public class Employee {
     private boolean metWithHr;
     private boolean metDeptStaff;
     private boolean reviewedDeptPolicies;
-    private boolean movedIn;    
+    private boolean cubicleAssigned;    
     private Date currentDate;
     private String cubeId;
     private HumanResources hr = new HumanResources();
@@ -67,92 +67,95 @@ public class Employee {
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
     }        
-    public boolean hasMetHr() {
+    private boolean hasMetHr() {
         return metWithHr;
     }
     public void setMetWithHr(boolean metWithHr) {
         this.metWithHr = metWithHr;
     }
-    public boolean hasMetDeptStaff() {
+    private boolean hasMetDeptStaff() {
         return metDeptStaff;
     }
     public void setMetDeptStaff(boolean metDeptStaff) {
         this.metDeptStaff = metDeptStaff;
     }
-    public boolean hasReviewedDeptPolicies() {
+    private boolean hasReviewedDeptPolicies() {
         return reviewedDeptPolicies;
     }
-    public void setReviewedDeptPolicies(boolean reviewedDeptPolicies) {
+    public void setReviewedDeptPolicies(boolean reviewedDeptPolicies) {        
         this.reviewedDeptPolicies = reviewedDeptPolicies;
     }
-    public boolean hasMovedIn() {
-        return movedIn;
+    private boolean hasCubicleAssigned() {
+        return cubicleAssigned;
     }
-    public void setMovedIn(boolean movedIn) {
-        this.movedIn = movedIn;
-    }          
-    
-    private void metDeptStaff(){
-        if (metWithHr){            
-            metDeptStaff = true;
-        }
-        else {
-            metDeptStaff = false;
-        }
-    }
-    
-    private void reviewedDeptPolicies(){
-        if (hasMetHr() == true && hasMetDeptStaff() == true){            
-            reviewedDeptPolicies = true;
-        }        
-    }   
-   
-    private void movedIn() {
-        if(metWithHr && metDeptStaff && reviewedDeptPolicies) {                                
-            movedIn = true;
-        }
-    }       
+    public void setCubicleAssigned(boolean cubicleAssigned) {
+        this.cubicleAssigned = cubicleAssigned;
+    }                          
     public void checkOrientationStatus(){
-       
+       // Check to see if they have met with HR
         if (hasMetHr() == true){            
-            System.out.println("\nHR Status:" + "\t\t" + "Completed " + getFormattedDate()); 
+            System.out.println("\nMet HR Status:" + "\t\t" + "Completed on " + getFormattedDate()); 
         }
         else {
-             System.out.println("HR Status:" + "\t\t" + "Incomplete"); 
+             System.out.println("Met HR Status:" + "\t\t" + "Incomplete"); 
         }
-        
-        metDeptStaff();
-        if (this.metDeptStaff){
-            System.out.println("Dept Staff Status:" + "\t" + "Completed " + getFormattedDate()); 
+        // Check to see if they have met with hr and the department staff
+        if (hasMetHr() == true && hasMetDeptStaff() == true){
+            System.out.println("Dept Staff Status:" + "\t" + "Completed on " + getFormattedDate()); 
+        }
+        //Different responses for varying scenarios
+        else if(hasMetHr() == true && hasMetDeptStaff() == false){
+             System.out.println("Dept Staff Status:" + "\t" + "Incomplete");
+             System.out.println("\tYou have met with HR, now you can meet with your department staff.");
         }
         else {
              System.out.println("Dept Staff Status:" + "\t" + "Incomplete");
              System.out.println("\tYou cannot meet with the Department Staff until you have met with HR.");
         }
-        
-        reviewedDeptPolicies();
-        if (this.reviewedDeptPolicies){
-            System.out.println("Dept Policies Status:" + "\t" + "Completed " + getFormattedDate()); 
+        //Check to see if they have reviewed department policies   
+        if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == true){
+            System.out.println("Dept Policies Status:" + "\t" + "Completed on " + getFormattedDate()); 
         }
-        else {
+        //Different responses for varying outcomes depending on what tasks have been completed.
+        else if (hasMetHr() == true && hasMetDeptStaff() == false && hasReviewedDeptPolicies() == false) {
              System.out.println("Dept Policies Status:" + "\t" + "Incomplete");
-             System.out.println("\tSorry, you cannot review department policies until you have first met with HR, then with the department staff.");           
+             System.out.println("\tYou have to meet your department staff before you can review your department policies.");           
         }
-        
-        movedIn();
-        if (this.movedIn){
-            System.out.println("Cubicle Status:" + "\t\t" + "Completed " + getFormattedDate());
-            System.out.println("Cubicle number: " + "\t" + getCubeId());
+        else if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == false) {
+             System.out.println("Dept Policies Status:" + "\t" + "Incomplete");
+             System.out.println("\tYou have met with HR and your department staff. It is now time to review the department policies.");           
         }
+        else {            
+             System.out.println("Dept Policies Status:" + "\t" + "Incomplete");
+             System.out.println("\tSorry, you cannot review department policies until you have first met with HR, then with the department staff.");                   
+        }
+               
+        if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == true && hasCubicleAssigned() == true){
+            System.out.println("Cubicle Status:" + "\t\t" + "Completed on " + getFormattedDate());
+            System.out.println("Cubicle Assigned: " + "\t" + getCubeId());
+        }
+        //Different responses for varying outcomes depending on what has been completed
+        else if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == false && hasCubicleAssigned() == false) {
+             System.out.println("Cubicle Status:" + "\t\t" + "Incomplete");
+             System.out.println("\tYou still need to review the department policies before you have your cubicle assigned.");
+        }
+        else if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == true && hasCubicleAssigned() == false) {
+             System.out.println("Cubicle Status:" + "\t\t" + "Incomplete");
+             System.out.println("\tYou have completed the department review, met your fellow staff, and met with HR. You are now able to have a cubicle assigned.");
+        }
+        else if (hasMetHr() == true && hasMetDeptStaff() == false && hasReviewedDeptPolicies() == false && hasCubicleAssigned() == false) {
+             System.out.println("Cubicle Status:" + "\t\t" + "Incomplete");
+             System.out.println("\tSorry, you cannot have a cubicle assigned until you meet with your department staff, and then have reviewed the department policies.");
+        }        
         else {
              System.out.println("Cubicle Status:" + "\t\t" + "Incomplete");
-             System.out.println("\tSorry, you cannot move in to your cubicle until you have fist met with HR, then with the department staff, and then have reviewed the department policies.");
+             System.out.println("\tSorry, you cannot move into your cubicle until you have first met with HR, then with the department staff, and then have reviewed the department policies.");
         }
     }
     
     
     /*
-    public void checkOrientationStatus(boolean metWithHr, boolean metDeptStaff, boolean reviewedDeptPolicies, boolean movedIn){
+    public void checkOrientationStatus(boolean metWithHr, boolean metDeptStaff, boolean reviewedDeptPolicies, boolean cubicleAssigned){
         metWithHr();
         if (this.metWithHr){
             
@@ -179,8 +182,8 @@ public class Employee {
              System.out.println("Dept Policies Status:" + "\t" + "Incomplete"); 
         }
         
-        movedIn();
-        if (this.movedIn){
+        cubicleAssigned();
+        if (this.cubicleAssigned){
             System.out.println("Cubicle Status:" + "\t\t" + "Completed " + getFormattedDate());
             System.out.println("Cubicle number: " + "\t" + getCubeId());
         }

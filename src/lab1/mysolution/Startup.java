@@ -30,7 +30,10 @@ public class Startup {
         employee.setBirthDate(new Date("04/11/1991"));
         employee.setCubeId(hr.getCubeId());
        
-        System.out.println(employee.hasMetWithHr());
+        employee.setMetWithHr(true);        
+        employee.setMetDeptStaff(false);
+        employee.setReviewedDeptPolicies(false);
+       
         
         employee.checkOrientationStatus();       
         
