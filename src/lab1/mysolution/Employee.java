@@ -67,7 +67,7 @@ public class Employee {
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
     }        
-    public boolean hasMetWithHr() {
+    public boolean hasMetHr() {
         return metWithHr;
     }
     public void setMetWithHr(boolean metWithHr) {
@@ -90,48 +90,31 @@ public class Employee {
     }
     public void setMovedIn(boolean movedIn) {
         this.movedIn = movedIn;
-    }  
-    private void metWithHr(){                      
-        metWithHr = true;            
-    }
+    }          
     
     private void metDeptStaff(){
         if (metWithHr){            
             metDeptStaff = true;
         }
         else {
-            System.out.println("Sorry, you cannot meet with "
-            + "department staff until you have met with HR.");
+            metDeptStaff = false;
         }
-        
     }
     
     private void reviewedDeptPolicies(){
-        if (metWithHr && metDeptStaff){            
+        if (hasMetHr() == true && hasMetDeptStaff() == true){            
             reviewedDeptPolicies = true;
-        }
-        else {
-            System.out.println("Sorry, you cannot review department "
-                + "policies until you first meet with HR and then "
-                + "meet with Department staff.");
-        }
+        }        
     }   
    
     private void movedIn() {
         if(metWithHr && metDeptStaff && reviewedDeptPolicies) {                                
             movedIn = true;
-        } else {
-            System.out.println("Sorry, you cannot move in to a "
-                    + "cubicle until you have first met with HR "
-                    + "and then with department staff, and then reviewed"
-                    + "department policies.");
         }
-
     }       
     public void checkOrientationStatus(){
-         metWithHr();
-        if (this.metWithHr){
-            
+       
+        if (hasMetHr() == true){            
             System.out.println("\nHR Status:" + "\t\t" + "Completed " + getFormattedDate()); 
         }
         else {
@@ -144,7 +127,7 @@ public class Employee {
         }
         else {
              System.out.println("Dept Staff Status:" + "\t" + "Incomplete");
-             System.out.println("You cannot meet with the Department Staff until you have met with HR.");
+             System.out.println("\tYou cannot meet with the Department Staff until you have met with HR.");
         }
         
         reviewedDeptPolicies();
@@ -152,7 +135,8 @@ public class Employee {
             System.out.println("Dept Policies Status:" + "\t" + "Completed " + getFormattedDate()); 
         }
         else {
-             System.out.println("Dept Policies Status:" + "\t" + "Incomplete"); 
+             System.out.println("Dept Policies Status:" + "\t" + "Incomplete");
+             System.out.println("\tSorry, you cannot review department policies until you have first met with HR, then with the department staff.");           
         }
         
         movedIn();
@@ -161,12 +145,13 @@ public class Employee {
             System.out.println("Cubicle number: " + "\t" + getCubeId());
         }
         else {
-             System.out.println("Cubicle Status:" + "\t\t" + "Incomplete"); 
+             System.out.println("Cubicle Status:" + "\t\t" + "Incomplete");
+             System.out.println("\tSorry, you cannot move in to your cubicle until you have fist met with HR, then with the department staff, and then have reviewed the department policies.");
         }
     }
     
     
-    
+    /*
     public void checkOrientationStatus(boolean metWithHr, boolean metDeptStaff, boolean reviewedDeptPolicies, boolean movedIn){
         metWithHr();
         if (this.metWithHr){
@@ -203,6 +188,7 @@ public class Employee {
              System.out.println("Cubicle Status:" + "\t\t" + "Incomplete"); 
         }                            
     }
+    */
 }
 
 
