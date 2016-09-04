@@ -55,7 +55,7 @@ public class Employee {
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }    
-    public void setBirthDate(Date birthDate) {
+    public void setBirthdate(Date birthDate) {
         this.birthDate = birthDate;
     }
     public String getCubeId() {
@@ -92,7 +92,18 @@ public class Employee {
         this.cubicleAssigned = cubicleAssigned;
     }                          
     public void checkOrientationStatus(){
-       // Check to see if they have met with HR
+       
+        System.out.println("Employee Name: " + getFirstName() + " " + getLastName());
+        System.out.println("Birthday: " + getBirthdate());
+        System.out.println("Social Security Number: " + getSsn());
+        // Only when they have completed all previous tasks, will it display their assigned cubicle.
+        if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == true && hasCubicleAssigned() == true){
+            System.out.println("Assigned Cubicle: " + getCubeId());
+        }
+        else {                        
+            System.out.println("Assigned Cubicle: " + "N/A");            
+        }
+        // Check to see if they have met with HR
         if (hasMetHr() == true){            
             System.out.println("\nMet HR Status:" + "\t\t" + "Completed on " + getFormattedDate()); 
         }
@@ -132,7 +143,7 @@ public class Employee {
                
         if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == true && hasCubicleAssigned() == true){
             System.out.println("Cubicle Status:" + "\t\t" + "Completed on " + getFormattedDate());
-            System.out.println("Cubicle Assigned: " + "\t" + getCubeId());
+            //System.out.println("Cubicle Assigned: " + "\t" + getCubeId());
         }
         //Different responses for varying outcomes depending on what has been completed
         else if (hasMetHr() == true && hasMetDeptStaff() == true && hasReviewedDeptPolicies() == false && hasCubicleAssigned() == false) {

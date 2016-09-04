@@ -22,19 +22,24 @@ public class Startup {
             may need to create a new class that talks to Employee. This does
             not have to be a GUI class.
         */
+        
+        // Create the new employee
         Employee employee = new Employee();
         HumanResources hr = new HumanResources();
+        // Add employee details
         employee.setFirstName("Chris");
         employee.setLastName("Palmer");
-        employee.setSsn("620-76-8353");
-        employee.setBirthDate(new Date("04/11/1991"));
+        employee.setSsn("123-45-6789");
+        employee.setBirthdate(new Date("04/11/1991"));
         employee.setCubeId(hr.getCubeId());
        
+        // change when task is completed
         employee.setMetWithHr(true);        
-        employee.setMetDeptStaff(false);
-        employee.setReviewedDeptPolicies(false);
+        employee.setMetDeptStaff(true);
+        employee.setReviewedDeptPolicies(true);
+        employee.setCubicleAssigned(false);
        
-        
+        // check how far along they are to getting started
         employee.checkOrientationStatus();       
         
     }
