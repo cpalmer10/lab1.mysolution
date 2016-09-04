@@ -9,11 +9,11 @@ import java.util.Date;
  *
  * @author Chris
  */
-public class EmployeeInfo {    
+public class HRManager {    
     private Employee employee;                    
    
    
-   public EmployeeInfo(String firstName, String lastName, String ssn, Date birthDate ,String cubeId){
+   public void HRManager(String firstName, String lastName, String ssn, Date birthDate, String cubeId){
        Employee e = new Employee();
        e.setFirstName(firstName);
        e.setLastName(lastName);
@@ -21,6 +21,9 @@ public class EmployeeInfo {
        e.setBirthDate(birthDate);
        e.setCubeId("C4786");
        employee = e;
+   }
+   public String getEmployeeStatus()  {
+        return employee.getStatus();   
    }
 }
 

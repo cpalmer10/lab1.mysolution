@@ -24,9 +24,16 @@ public class Employee {
     private Date currentDate;
 
     public Employee() {
-             currentDate = new Date();
+        currentDate = new Date();
     }
-
+    
+    public void orientationProgress(String cubeId){
+        metWithHr();
+        metDeptStaff();
+        reviewedDeptPolicies();
+        movedIn(cubeId);
+    }
+            
     public String getFirstName() {
         return firstName;
     }
@@ -74,7 +81,24 @@ public class Employee {
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
     }
-
+    public String getStatus(){
+        return cubeId;
+    }
+    private void metWithHr(){
+        
+    }
+    
+    private void metDeptStaff(){
+        
+    }
+    
+    private void reviewedDeptPolicies(){
+        
+    }
+    
+    private void movedIn(String cubeId){
+        
+    }
     
     
     
